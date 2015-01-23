@@ -72,9 +72,8 @@ To install, first add the linux user to run solr, set a password, and log in as 
 
 Then clone and apply puppet manifest:
 
-    git clone https://github.com/bjornhjelle/solr-puppet.git
-    cd solr-puppet
-    sudo puppet apply --modulepath provisioning/modules provisioning/manifests/server.pp config
+    git clone https://github.com/bjornhjelle/solr-puppet.git config
+    sudo puppet apply --modulepath config/provisioning/modules config/provisioning/manifests/server.pp
 
 Log out and back in to set environment variable, and then start Solr: 
 

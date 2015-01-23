@@ -46,14 +46,23 @@ class solr_server {
     creates => "/home/solr/distr/solr-4.10.3",
     require => File["distr"]
   }
+  
+ file { '/home/solr/solr':
+   ensure => link,
+   target => '/home/solr/distr/solr-4.10.3',
+   require => Exec["get and unpack solr"]
+  }  
  
   file { "/home/solr/solr/example/resources/log4j.properties":
     source => "puppet:///modules/solr_server/log4j.properties",
     mode => 644,
     owner => "solr",
-    group => "solr"
+    group => "solr",
+    require => File["/home/solr/solr"]
   }  
-    
+  
+
+  
 #  
 #  file { "/etc/init.d/solr":
 #    ensure => present,
