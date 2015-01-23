@@ -51,6 +51,14 @@ class solr_development {
     group => "vagrant"
   }
   
+  file { "/home/vagrant/solr_home/collection1/core.properties":
+    source => "puppet:///modules/solr_development/core.properties",
+    mode => 644,
+    owner => "solr",
+    group => "solr",
+    require => File["/home/solr/solr"]
+  }
+    
   file { '/home/vagrant/solr':
    ensure => link,
    target => '/home/vagrant/distr/solr-4.10.3',

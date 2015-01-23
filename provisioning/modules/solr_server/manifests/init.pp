@@ -61,7 +61,13 @@ class solr_server {
     require => File["/home/solr/solr"]
   }  
   
-
+  file { "/home/solr/config/solr_home/collection1/core.properties":
+    source => "puppet:///modules/solr_server/core.properties",
+    mode => 644,
+    owner => "solr",
+    group => "solr",
+    require => File["/home/solr/solr"]
+  }  
   
 #  
 #  file { "/etc/init.d/solr":
