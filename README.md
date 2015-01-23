@@ -6,13 +6,13 @@ Scripts to install Solr 4.10.3 using puppet. Two ways to install are implemented
  2. on a Linux machine (tested on Fedora 20)
 
 ## Getting started ##
-Before installing in a VM you must have installed: 
+Before installing in a VM you must have installed:
 
 * Ruby
 * Vagrant
 * VirtualBox
 
-To install on a Linux machine you must have installed: 
+To install on a Linux machine you must have installed:
 
 * Ruby
 * Puppet
