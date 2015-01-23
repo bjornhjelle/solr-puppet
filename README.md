@@ -30,7 +30,7 @@ To install Solr in a VM
     cd solr-puppet
     vagrant up
 
-### Starte solr ###
+### Start Solr ###
 
 Log in to the VM and start Solr
 
@@ -76,6 +76,11 @@ Then clone and apply puppet manifest:
     cd solr-puppet
     sudo puppet apply --modulepath provisioning/modules provisioning/manifests/server.pp
 
+Log out and back in to set environment variable, and then start Solr: 
+
+    solr start -f 
+    
+    
     
 
 

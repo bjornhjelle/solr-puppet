@@ -56,8 +56,8 @@ class solr_server {
   file { "/home/solr/solr/example/resources/log4j.properties":
     source => "puppet:///modules/solr_server/log4j.properties",
     mode => 644,
-    owner => "vagrant",
-    group => "vagrant"
+    owner => "solr",
+    group => "solr"
   }  
     
 #  
