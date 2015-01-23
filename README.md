@@ -1,35 +1,32 @@
-# Solr, virtuelt utviklingsmiljø #
+# Solr, install with puppet #
 
-Skripts for å installere Solr. To varianter:
+Scripts to install Solr 4.10.3 using puppet. Two ways to install are implemented:
 
- 1. utviklingsmiljø i en Linux VM (Fedora 20)
- 2. for å installere på Linux (testet på Fedora 20)
+ 1. in a Linux VM (Fedora 20)
+ 2. on a Linux machine (tested on Fedora 20)
 
-## Forutsetninger ##
-For å installere i VM må følgende være installert: 
+## Getting started ##
+Before installing in a VM you must have installed: 
 
 * Ruby
 * Vagrant
 * VirtualBox
 
-For å installere på Linux, f eks på en server trenger du: 
+To install on a Linux machine you must have installed: 
 
 * Ruby
 * Puppet
 
-
-
-## Klone repositoryen ##
-
-Klone repositoryen: 
+Then clone the repository: 
 
     git clone ...
+    cd solr-puppet
     
-Installere VM: 
+## Install Solr in a VM ##
+
+To install Solr in a VM
 
     vagrant up
-
-
 
 ## Starte solr ##
 

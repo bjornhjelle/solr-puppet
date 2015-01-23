@@ -2,8 +2,6 @@
 
 class solr_development {
 
-
-
   file { "/home/vagrant/.bash_profile":
     source => "puppet:///modules/solr_development/bash_profile",
     mode => 644,
@@ -59,7 +57,12 @@ class solr_development {
   exec { "allow access to port 8983":
     command => "firewall-cmd --permanent --zone=public --add-port=8983/tcp",
     require => Exec["get and unpack solr"]
- }
+  }
+  
+  exec {"restart firewalld":
+    command => "systemctl restart firewalld.service",
+    require => Exec["allow access to port 8983"]
+  }
    
   
 #  file { "/etc/init.d/solr":
