@@ -74,7 +74,7 @@ Then clone and apply puppet manifest:
 
     git clone https://github.com/bjornhjelle/solr-puppet.git
     cd solr-puppet
-    sudo puppet apply --modulepath provisioning/modules provisioning/manifests/server.pp
+    sudo puppet apply --modulepath provisioning/modules provisioning/manifests/server.pp config
 
 Log out and back in to set environment variable, and then start Solr: 
 

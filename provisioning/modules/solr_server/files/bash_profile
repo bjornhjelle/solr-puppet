@@ -12,5 +12,5 @@ fi
 
 alias h="history"
 
-export SOLR_HOME=/home/solr/solr_home
+export SOLR_HOME=/home/solr/config/solr_home
 export PATH="$PATH:$HOME/solr/bin"
