@@ -62,5 +62,20 @@ Or use the full set of example docs available in the VM:
 * Log files will be stored in `/home/vagrant/logs`
 * Solr home is the directory `/home/vagrant/solr_home` (based on the example home i the distribution: `example/solr`)
 
+## Solr on a Linux machine ##
+
+To install, first add the linux user to run solr, set a password, and log in as `solr`: 
+  
+    useradd solr
+    passwd solr 
+    su - solr
+
+Then clone and apply puppet manifest:
+
+    git clone https://github.com/bjornhjelle/solr-puppet.git
+    cd solr-puppet
+    sudo puppet apply --modulepath provisioning/modules provisioning/manifests/server.pp
+
+    
 
 
