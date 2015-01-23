@@ -41,7 +41,7 @@ class solr_development {
     group => "vagrant",
     creates => "/home/vagrant/distr/solr-4.10.3",
     require => File["distr"]
- }
+  }
 
 
   file { "/home/vagrant/solr/example/resources/log4j.properties":
@@ -55,8 +55,7 @@ class solr_development {
     source => "puppet:///modules/solr_development/core.properties",
     mode => 644,
     owner => "solr",
-    group => "solr",
-    require => File["/home/solr/solr"]
+    group => "solr"
   }
     
   file { '/home/vagrant/solr':

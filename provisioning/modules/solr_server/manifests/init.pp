@@ -67,21 +67,25 @@ class solr_server {
     owner => "solr",
     group => "solr",
     require => File["/home/solr/solr"]
-  }  
+  }    
   
-#  
-#  file { "/etc/init.d/solr":
-#    ensure => present,
-#    source => 'puppet:///modules/solr/solr',
-#    owner => "root",
-#    group => "root",
-#    mode => 755,
-#    require => Exec["get and unpack solr"]
-#  } 
+  file { "/etc/init.d/solr":
+    ensure => present,
+    source => 'puppet:///modules/solr_server/solr_startup',
+    owner => "root",
+    group => "root",
+    mode => 755,
+    require => File["/home/solr/config/solr_home/collection1/core.properties"]
+  } 
 
-#  exec {"chkconfig solr":
-#    command => "chkconfig --add solr",
-#    require => File["/etc/init.d/solr"]
-#  }
+  exec {"chkconfig solr":
+    command => "chkconfig solr on",
+    require => File["/etc/init.d/solr"]
+  }
   
+  exec {"start solr":
+    command => "systemctl start solr",
+    require => File["/etc/init.d/solr"]
+  }
+    
 }
