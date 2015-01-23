@@ -39,14 +39,10 @@ class solr_development {
     cwd => "/home/vagrant",
     user => "vagrant",
     group => "vagrant",
-    creates => "/home/vagrant/solr-4.10.3",
+    creates => "/home/vagrant/distr/solr-4.10.3",
     require => File["distr"]
  }
-#  file { '/var/www/html/plots':
-#    ensure => 'directory',
-#    owner => 'swan',
-#    group => 'users'
-#  }
+
 
   file { "/home/vagrant/solr/example/resources/log4j.properties":
     source => "puppet:///modules/solr_development/log4j.properties",
@@ -56,11 +52,16 @@ class solr_development {
   }
   
   file { '/home/vagrant/solr':
-   ensure => 'link',
+   ensure => link,
    target => '/home/vagrant/distr/solr-4.10.3',
    require => Exec["get and unpack solr"]
- }
-  
+  }
+ 
+  file { '/home/vagrant/solr_home':
+    ensure => link,
+    target => '/project/solr_home'
+  }
+    
   exec { "allow access to port 8983":
     command => "firewall-cmd --permanent --zone=public --add-port=8983/tcp",
     require => Exec["get and unpack solr"]

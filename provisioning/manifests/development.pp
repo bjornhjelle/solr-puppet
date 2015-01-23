@@ -1,10 +1,10 @@
 # http://projects.puppetlabs.com/projects/1/wiki/File_Permission_Check_Patterns
 
-define check_mode($mode) {
-  exec { "/bin/chmod $mode $name":
-    unless => "/bin/sh -c '[ $(/usr/bin/stat -c %a $name) == $mode ]'",
-  }
-}
+#define check_mode($mode) {
+#  exec { "/bin/chmod $mode $name":
+#    unless => "/bin/sh -c '[ $(/usr/bin/stat -c %a $name) == $mode ]'",
+#  }
+#}
 
 node default {
 
@@ -18,9 +18,9 @@ node default {
     require => Class["timezone"]
   }
     
-  group { "puppet":
-     ensure => "present"
-  }
+#  group { "puppet":
+#     ensure => "present"
+#  }
 
   package { ["wget", "curl", "make", "lsof"]:
     ensure => present
