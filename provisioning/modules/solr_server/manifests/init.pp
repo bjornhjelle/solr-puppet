@@ -44,7 +44,7 @@ class solr_server {
     user => "solr",
     group => "solr",
     creates => "/home/solr/distr/solr-4.10.3",
-    require => Exec["add-solr-user"]
+    require => File["distr"]
  }
 
   file { '/home/solr/solr':
