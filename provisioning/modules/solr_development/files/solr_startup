@@ -12,11 +12,15 @@
 ##############################################################################
 # Change these to match your environment. In particular, change SOLR_HOME
 # and SOLR_RUNASUSER
-JETTY_PORT=8983
 
-SOLR_HOME=/home/solr/solr_config
-SOLR_SERVER_DIR=/home/solr/solr
-SOLR_RUNASUSER=solr
+JETTY_PORT=8983
+JETTY_STOP_PORT=8884
+JETTY_STOP_KEY="34t6adfsgertt435po34"
+
+SOLR_NAME=solr
+SOLR_HOME=/home/vagrant/solr_home
+SOLR_SERVER_DIR=/home/vagrant/solr/example
+SOLR_RUNASUSER=vagrant
 
 ##############################################################################
 
@@ -25,8 +29,9 @@ SOLR_RUNASUSER=solr
 ##############################################################################
 THIS=$0
 
-#JAVA_OPTS="-Xmx2048m -XX:MaxPermSize=128m"
-CMD="${SOLR_SERVER_DIR}/bin/solr"
+JAVA_OPTS="-DSTOP.PORT=${JETTY_STOP_PORT} -DSTOP.KEY=${JETTY_STOP_KEY} -Djetty.port=${JETTY_PORT} -Xmx2048m -XX:MaxPermSize=128m -Dsolr.solr.home=${SOLR_HOME}"
+
+CMD="java ${JAVA_OPTS} -jar start.jar"
 
 if [ $(whoami) == root ]; then
     echo Switching from root to $SOLR_RUNASUSER: su $SOLR_RUNASUSER -c "${THIS} $*"
@@ -42,24 +47,30 @@ fi
 
 
 start() {
-    echo "Starting Solr"
+    echo "Starting ${SOLR_NAME}"
     ps -ef | grep "\-Djetty.port=${JETTY_PORT}" | grep -v grep
     if [ "$?" = "0" ]; then
-      echo "Solr is already running"
+      echo "${SOLR_NAME} is already running"
       exit 1
     else
-      (cd $SOLR_SERVER_DIR ; ${CMD} -p ${JETTY_PORT} start)
+      (cd $SOLR_SERVER_DIR ; $CMD >logs/$SOLR_NAME-stdout.log 2>logs/$SOLR_NAME-stderr.log &)
     fi   
 }
 
 stop() {
     echo "Stopping ${SOLR_NAME}"
-    (cd $SOLR_SERVER_DIR ; ${CMD} stop -all)
+    (cd $SOLR_SERVER_DIR ; $CMD --stop)
 }
 
 status() {
     echo "Searching for ${SOLR_NAME}"
-    (cd $SOLR_SERVER_DIR ; ${CMD} -i)
+    ps -ef | grep "\-Djetty.port=${JETTY_PORT}" | grep -v grep
+    if [ "$?" = "0" ]; then
+      echo "${SOLR_NAME} is running"
+    else
+      echo "${SOLR_NAME} is not running"
+      exit 1
+    fi
 }
 
 case "$1" in

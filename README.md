@@ -5,7 +5,7 @@ Scripts to install Solr 4.10.3 using puppet. Two ways to install are implemented
  1. in a Linux VM (Fedora 20)
  2. on a Linux machine (tested on Fedora 20)
 
-Solr is installed with Solr home, logs-directory and indexes outside of the Solr-distribution to make it easy to change to another release of Solr. 
+Solr is installed with Solr home, log-directory and index-directory outside of the Solr-distribution to make it easy to change to another release of Solr. Script for start on boot is provided. 
 
 ## Getting started ##
 Before installing in a VM you must have installed:
@@ -75,11 +75,17 @@ Then clone and apply puppet manifest:
     git clone https://github.com/bjornhjelle/solr-puppet.git config
     sudo puppet apply --modulepath config/provisioning/modules config/provisioning/manifests/server.pp
 
-Log out and back in to set environment variable, and then start Solr: 
+Solr should now have been started with Solr home set to config/solr_home where the collection1 core is configured. 
 
-    solr start -f 
-    
-    
+### Start and stop Solr ###
+Logged in as `solr`, Solr can be started and stopped with the `solr` script as described [here](https://cwiki.apache.org/confluence/display/solr/Running+Solr). But Solr has now been configured to start on boot and can be stopped/restarted/started with `systemctl`: 
+
+    sudo systemctl stop|start|restart solr
+
+
+## Port numbers ##
+Jetty port numbers for stopping and starting are set in the startup scripts that are provisioned by puppet to /etc/init.d/solr. 
+
     
 
 
