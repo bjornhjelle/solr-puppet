@@ -48,6 +48,13 @@ class solr_development {
 #    group => 'users'
 #  }
 
+  file { "/home/vagrant/solr/example/resources/log4j.properties":
+    source => "puppet:///modules/solr_development/log4j.properties",
+    mode => 644,
+    owner => "vagrant",
+    group => "vagrant"
+  }
+  
   file { '/home/vagrant/solr':
    ensure => 'link',
    target => '/home/vagrant/distr/solr-4.10.3',
