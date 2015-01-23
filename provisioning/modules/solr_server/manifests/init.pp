@@ -13,7 +13,7 @@ class solr_server {
     path => '/opt/solr_indexes',
     ensure => 'directory',
     owner => 'solr',
-    group => 'solr'
+    group => 'solr',
     mode => 755,
   } 
   
