@@ -9,7 +9,8 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
 alias h="history"
 
-export SOLR_HOME=/project/solr_config
+export SOLR_HOME=/home/solr/solr_home
 export PATH="$PATH:$HOME/solr/bin"
