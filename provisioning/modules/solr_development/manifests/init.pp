@@ -57,13 +57,14 @@ class solr_development {
     owner => "vagrant",
     group => "vagrant"
   }
-    
+  
+      
   file { '/home/vagrant/solr':
    ensure => link,
    target => '/home/vagrant/distr/solr-4.10.3',
    require => Exec["get and unpack solr"]
   }
-  
+
   file { "/etc/init.d/solr":
     ensure => present,
     source => 'puppet:///modules/solr_development/solr_startup',
@@ -72,12 +73,25 @@ class solr_development {
     mode => 755,
     require => File["/home/vagrant/solr_home/collection1/core.properties"]
   }  
-   
+
   file { '/home/vagrant/solr_home':
     ensure => link,
     target => '/project/solr_home'
   }
-    
+
+  file { '/home/vagrant/www':
+    ensure => link,
+    target => '/project/www'
+  }
+
+  file { "/home/vagrant/solr/example/contexts/www.xml":
+    source => "puppet:///modules/solr_development/www.xml",
+    mode => 644,
+    owner => "vagrant",
+    group => "vagrant",
+    require => [File["/home/vagrant/www"],Exec["get and unpack solr"]]
+  }
+
   exec { "allow access to port 8983":
     command => "firewall-cmd --permanent --zone=public --add-port=8983/tcp",
     require => Exec["get and unpack solr"]
@@ -87,16 +101,16 @@ class solr_development {
     command => "systemctl restart firewalld.service",
     require => Exec["allow access to port 8983"]
   }
-   
+
   exec {"chkconfig solr":
     command => "chkconfig solr on",
     require => File["/etc/init.d/solr"]
   }
-  
-  exec {"start solr":
-    command => "systemctl start solr",
+
+  exec {"restart solr":
+    command => "systemctl restart solr",
     require => File["/etc/init.d/solr"]
-  }
+ 
   
  
 }

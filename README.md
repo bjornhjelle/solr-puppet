@@ -78,7 +78,13 @@ Then clone and apply puppet manifest:
 Solr should now have been started with Solr home set to config/solr_home where the collection1 core is configured. 
 
 ### Start and stop Solr ###
-Logged in as `solr`, Solr can be started and stopped with the `solr` script as described [here](https://cwiki.apache.org/confluence/display/solr/Running+Solr). But Solr has now been configured to start on boot and can be stopped/restarted/started with `systemctl`: 
+Logged in as `solr`, Solr can be started and stopped with the `solr` script as described [here](https://cwiki.apache.org/confluence/display/solr/Running+Solr). But Solr has now been configured to start on boot and can be stopped/restarted/started as a service: 
+
+    sudo service solr stop|start|restart
+
+
+TODO: fix this so systemd also works: 
+Solr can be stopped/restarted/started with `systemctl`: 
 
     sudo systemctl stop|start|restart solr
 

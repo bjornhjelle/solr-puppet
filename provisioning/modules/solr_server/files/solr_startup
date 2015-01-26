@@ -20,6 +20,7 @@ JETTY_STOP_KEY="34t6adfsgertt435po34"
 SOLR_NAME=solr
 SOLR_HOME=/home/solr/config/solr_home
 SOLR_SERVER_DIR=/home/solr/solr/example
+SOLR_INSTANCE_DIR=/home/solr/solr
 SOLR_RUNASUSER=solr
 
 ##############################################################################
@@ -29,7 +30,7 @@ SOLR_RUNASUSER=solr
 ##############################################################################
 THIS=$0
 
-JAVA_OPTS="-DSTOP.PORT=${JETTY_STOP_PORT} -DSTOP.KEY=${JETTY_STOP_KEY} -Djetty.port=${JETTY_PORT} -Xmx2048m -XX:MaxPermSize=128m -Dsolr.solr.home=${SOLR_HOME}"
+JAVA_OPTS="-DSTOP.PORT=${JETTY_STOP_PORT} -DSTOP.KEY=${JETTY_STOP_KEY} -Djetty.port=${JETTY_PORT} -Xmx2048m -XX:MaxPermSize=128m -Dsolr.solr.home=${SOLR_HOME} -Dsolr.install.dir=${SOLR_INSTANCE_DIR}"
 
 CMD="java ${JAVA_OPTS} -jar start.jar"
 
