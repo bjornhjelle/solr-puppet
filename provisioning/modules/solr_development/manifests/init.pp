@@ -108,7 +108,8 @@ class solr_development {
   }
 
   exec {"restart solr":
-    command => "systemctl restart solr",
+    #command => "systemctl restart solr",
+    command => "/sbin/service solr restart",
     require => File["/etc/init.d/solr"]
  
   
