@@ -2,4 +2,6 @@
 .vagrant
 solr_home/collection1/data
 solr_home/collection1/core.properties
-
+.DS_Store
+solr_home/test/data
+solr_home/test/core.properties

@@ -22,19 +22,36 @@ node default {
 #     ensure => "present"
 #  }
 
-  package { ["wget", "curl", "make", "lsof"]:
+  package { ["wget", "curl", "make"]:
     ensure => present
   }    
 
   file {
     "/etc/hosts":
-       source => "/tmp/puppet/provisioning/files/hosts",
+       source => "/vagrant/provisioning/files/hosts",
        mode => 644,
        owner => root,
        group => root
   }
   
-  include solr_development
+  class { "solr": 
+      user => "vagrant", 
+      group => "vagrant",
+	  home_dir => "/home/vagrant"    
+  }
+	
+  file { "/home/vagrant/solr_home":
+      ensure => link,
+      target => '/vagrant/solr_home'
+  }
+
+  file { '/home/vagrant/www':
+      ensure => link,
+      target => '/vagrant/www'
+  }
+		
+  #include 
+  #include python_development
 
   
 }
