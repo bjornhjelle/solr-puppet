@@ -4,7 +4,7 @@
   <Set name="contextPath">/www</Set>
   <Set name="handler">
     <New class="org.eclipse.jetty.server.handler.ResourceHandler">
-     <Set name="resourceBase">/home/vagrant/www</Set>
+     <Set name="resourceBase"><%=@home_dir%>/www</Set>
       <Set name="directoriesListed">true</Set>
     </New>
   </Set>
