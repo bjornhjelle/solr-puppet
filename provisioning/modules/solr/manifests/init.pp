@@ -72,7 +72,7 @@ class solr($user = 'solr', $group = 'solr', $home_dir = '/home/solr') {
     owner => "root",
     group => "root",
     mode => 755,
-    require => File["${home_dir}/solr_home/collection1/core.properties"]
+    require => File["${home_dir}/solr_home/test/core.properties"]
   }  
 
 
