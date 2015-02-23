@@ -123,7 +123,12 @@
    <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
         
    <field name="sku" type="text_en_splitting_tight" indexed="true" stored="true" omitNorms="true"/>
+   
    <field name="name" type="text_general" indexed="true" stored="true"/>
+   <field name="email" type="text_general" indexed="true" stored="true"/>
+   <field name="phone" type="text_general" indexed="true" stored="true"/>
+   
+   
    <field name="manu" type="text_general" indexed="true" stored="true" omitNorms="true"/>
    <field name="cat" type="string" indexed="true" stored="true" multiValued="true"/>
    <field name="features" type="text_general" indexed="true" stored="true" multiValued="true"/>
