@@ -50,7 +50,7 @@ class solr($user = 'solr', $group = 'solr', $home_dir = '/home/solr') {
     mode => 644
   }
   
-  file { "${home_dir}/solr_home/collection1/core.properties":
+  file { "${home_dir}/solr_home/test/core.properties":
     #source => "puppet:///modules/solr/core.properties",
 	content => template('solr/core.properties.erb'),
     owner => $user,
