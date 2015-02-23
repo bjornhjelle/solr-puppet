@@ -98,7 +98,7 @@ class solr($user = 'solr', $group = 'solr', $home_dir = '/home/solr') {
 
   exec {"chkconfig solr":
     command => "chkconfig solr on",
-    require => Exec["restart firewalld"]
+    require => [Exec["restart firewalld"], File["/etc/init.d/solr"]]
   }
 
   exec {"restart solr":
