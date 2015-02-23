@@ -21,7 +21,7 @@ To install on a Linux machine you must have installed:
 
 Then clone the repository: 
 
-    git clone ...
+    git clone https://github.com/bjornhjelle/solr-puppet.git
     
 ## Solr in a VM ##
 
