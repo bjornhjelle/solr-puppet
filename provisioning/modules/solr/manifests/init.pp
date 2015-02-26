@@ -6,8 +6,7 @@ class solr($user = 'solr', $group = 'solr', $home_dir = '/home/solr') {
     mode => 644,
     owner => $user,
     group => $group
-  } 
-  
+  }
 
   file { 'indexes':
     path => ["${home_dir}/indexes"],
@@ -56,8 +55,7 @@ class solr($user = 'solr', $group = 'solr', $home_dir = '/home/solr') {
     owner => $user,
     group => $group,
     mode => 644
-  }
-  
+  }  
       
   file { "${home_dir}/solr":
    ensure => link,
@@ -73,32 +71,16 @@ class solr($user = 'solr', $group = 'solr', $home_dir = '/home/solr') {
     group => "root",
     mode => 755,
     require => File["${home_dir}/solr_home/test/core.properties"]
-  }  
-
-
-
-  file { "${home_dir}/solr/example/contexts/www.xml":
-    #source => "puppet:///modules/solr/www.xml",
-	content => template('solr/www.xml.erb'),
-    mode => 644,
-    owner => $user,
-    group => $group,
-    require => [File["${home_dir}/www"],Exec["get and unpack solr"]]
   }
 
   exec { "allow access to port 8983":
-    command => "firewall-cmd --permanent --zone=public --add-port=8983/tcp",
+    command => "firewall-cmd --permanent --zone=public --add-port=8983/tcp && firewall-cmd --reload",
     require => Exec["get and unpack solr"]
-  }
-  
-  exec {"restart firewalld":
-    command => "systemctl restart firewalld.service",
-    require => Exec["allow access to port 8983"]
   }
 
   exec {"chkconfig solr":
     command => "chkconfig solr on",
-    require => [Exec["restart firewalld"], File["/etc/init.d/solr"]]
+    require => [Exec["allow access to port 8983"], File["/etc/init.d/solr"]]
   }
 
   exec {"restart solr":
