@@ -32,6 +32,14 @@ node default {
        mode => 644,
        owner => root,
        group => root
+  }  
+  
+  file {
+    "/etc/environment":
+       source => "/vagrant/provisioning/files/environment",
+       mode => 644,
+       owner => root,
+       group => root
   }
   
   class { "solr": 
